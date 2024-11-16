@@ -3,8 +3,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const CurrencyConverter = () => {
-  
-    const [currencies, setCurrencies] = useState([]);
+  const [currencies, setCurrencies] = useState([]);
   const [fromCurrency, setFromCurrency] = useState("USD");
   const [toCurrency, setToCurrency] = useState("EUR");
   const [amount, setAmount] = useState("");
@@ -13,7 +12,6 @@ const CurrencyConverter = () => {
   const [conversionHistory, setConversionHistory] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Fetch supported currencies
   useEffect(() => {
     axios
       .get("/api/currencies")
@@ -29,7 +27,6 @@ const CurrencyConverter = () => {
         setConvertedAmount(response.data.convertedAmount);
         setConversionRate(response.data.conversionRate);
 
-        // Store the conversion in history
         const conversionRecord = {
           fromCurrency,
           toCurrency,
@@ -43,7 +40,6 @@ const CurrencyConverter = () => {
           ...prevHistory
         ]);
 
-        // Persist history in localStorage
         localStorage.setItem(
           "conversionHistory",
           JSON.stringify([conversionRecord, ...conversionHistory])
@@ -53,7 +49,6 @@ const CurrencyConverter = () => {
       .finally(() => setLoading(false));
   };
 
-  // Load history from localStorage on mount
   useEffect(() => {
     const savedHistory =
       JSON.parse(localStorage.getItem("conversionHistory")) || [];

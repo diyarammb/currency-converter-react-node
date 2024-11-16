@@ -10,7 +10,10 @@ app.use(bodyParser.json());
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: [
+      "http://localhost:3000",
+      "https://currency-convertor-n6u7oob2w-dayas-projects-158d4082.vercel.app"
+    ],
     credentials: true
   })
 );

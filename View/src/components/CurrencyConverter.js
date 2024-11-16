@@ -14,9 +14,7 @@ const CurrencyConverter = () => {
 
   useEffect(() => {
     axios
-      .get(
-        "https://currency-convertor-n6u7oob2w-dayas-projects-158d4082.vercel.app/api/currencies"
-      )
+      .get("http://localhost:5000/api/currencies")
       .then((response) => setCurrencies(Object.keys(response.data.data)))
       .catch((error) => console.error("Error fetching currencies:", error));
   }, []);
@@ -24,14 +22,11 @@ const CurrencyConverter = () => {
   const handleConversion = () => {
     setLoading(true);
     axios
-      .post(
-        "https://currency-convertor-n6u7oob2w-dayas-projects-158d4082.vercel.app/api/convert",
-        {
-          fromCurrency,
-          toCurrency,
-          amount
-        }
-      )
+      .post("http://localhost:5000/api/convert", {
+        fromCurrency,
+        toCurrency,
+        amount
+      })
       .then((response) => {
         setConvertedAmount(response.data.convertedAmount);
         setConversionRate(response.data.conversionRate);
